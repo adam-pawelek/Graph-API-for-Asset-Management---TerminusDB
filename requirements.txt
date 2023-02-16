@@ -1,0 +1,5 @@
+terminusdb_client
+terminusdb-client
+pydantic
+typing
+fastapi
