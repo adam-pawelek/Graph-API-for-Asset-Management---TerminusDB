@@ -3,3 +3,4 @@ terminusdb-client
 pydantic
 typing
 fastapi
+uvicorn
