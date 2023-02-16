@@ -1,8 +1,11 @@
+import json
+
 from fastapi import FastAPI
 from pydantic import BaseModel
-from terminusdb_client import Client, WOQLClient
+from terminusdb_client import Client, WOQLClient, WOQLSchema
 from terminusdb_client.schema import Schema, DocumentTemplate, RandomKey
 from typing import Union
+
 
 client = WOQLClient("http://127.0.0.1:6363/")
 client.connect()
@@ -11,7 +14,7 @@ try:
 except:
     pass
 
-my_schema = Schema()
+my_schema = WOQLSchema()
 
 class Pet(DocumentTemplate):
     _schema = my_schema
@@ -71,16 +74,18 @@ async def root():
     sth = (list(client.get_all_documents()))
     print ("asdfasdf")
     doc_id = sth[0]["@id"]
-    #client.delete_document(doc_id)
+    cos = client.get_document(doc_id)
     my_dog = {}
-    my_dog["name"] = "update"
-    my_dog["species"] = "ll"
-    my_dog["age"] = 1
-    my_dog["weight"] =12
+    cos["name"] = "update"
+    cos["species"] = "ll"
+    cos["age"] = 1
+    cos["weight"] =12
     print(my_dog)
 
     #my_dog = Pet(name="asdf", species="asdfas", age=10, weight=12)
-    query = client.update_document(doc_id, my_dog)
+    #my_dog = json.dumps(my_dog.__dict__,cls=MyEncoder)
+
+    query = client.replace_document(cos)
 
    # client.update(query)
 
