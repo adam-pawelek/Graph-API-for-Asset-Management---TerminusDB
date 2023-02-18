@@ -1,14 +1,25 @@
 from datetime import datetime
 
-from terminusdb_client import DocumentTemplate
+from terminusdb_client import DocumentTemplate, WOQLSchema
 from typing import Set, List
 
 
+my_schema = WOQLSchema()
+
+class Pet(DocumentTemplate):
+    _schema = my_schema
+    name: str
+    species: str
+    age: int
+    weight: float
+
 
 class Person(DocumentTemplate):
+    _schema = my_schema
     id: str
     name: str
     surname: str
+
 
 class Space(DocumentTemplate):
     _schema = my_schema
@@ -22,16 +33,18 @@ class Space(DocumentTemplate):
 
 
 class Sensor(DocumentTemplate):
+    _schema = my_schema
     id: str
     label: str
     type: str
     fw_version: str
     hw_version: float # optional
     installation_date: datetime
-    sensor_location = Space
+    sensor_location: Space
 
 
 class Actuator(DocumentTemplate):
+    _schema = my_schema
     id: str
     label: str
     type: str
@@ -43,6 +56,7 @@ class Actuator(DocumentTemplate):
 
 
 class Equipment(DocumentTemplate):
+    _schema = my_schema
     id: str
     label: str
     type: str
@@ -51,6 +65,7 @@ class Equipment(DocumentTemplate):
 
 
 class Logic (DocumentTemplate):
+    _schema = my_schema
     id: str
     label: str
     type: str
@@ -59,6 +74,7 @@ class Logic (DocumentTemplate):
 
 
 class Place(DocumentTemplate):
+    _schema = my_schema
     id: str
     label: str
     type: str
@@ -69,6 +85,7 @@ class Place(DocumentTemplate):
 
 
 class User(DocumentTemplate):
+    _schema = my_schema
     id: str
     name: str
     surname: str

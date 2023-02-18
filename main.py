@@ -6,7 +6,7 @@ from terminusdb_client import Client, WOQLClient, WOQLSchema
 from terminusdb_client.schema import Schema, DocumentTemplate, RandomKey
 from typing import Union, Set, List
 
-
+from database import my_schema
 
 
 
@@ -17,23 +17,15 @@ try:
 except:
     pass
 
-my_schema = WOQLSchema()
 
-class Pet(DocumentTemplate):
-    _schema = my_schema
-    name: str
-    species: str
-    age: int
-    weight: float
-
-
+'''
 class Player(DocumentTemplate):
     _schema = my_schema
     name: str
     age: int
     weight: float
     friend_of: Set ['Pet']
-
+'''
 
 
 
@@ -71,7 +63,7 @@ async def root():
     #client.delete_document(doc_id)
     return (list(client.get_all_documents()))
 
-
+'''
 @app.post("/add-player")
 async def say_hello(item :Item):
     my_dog = Pet(name=item.name, species=item.species, age=item.age, weight=item.weight)
@@ -81,7 +73,7 @@ async def say_hello(item :Item):
 
     return {"message": f"Hello {item}"}
 
-
+'''
 
 @app.post("/add-pet")
 async def say_hello(item :Item):
