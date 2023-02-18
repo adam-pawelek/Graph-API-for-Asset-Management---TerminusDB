@@ -1,38 +1,26 @@
 import json
 
 from fastapi import FastAPI
-from pydantic import BaseModel
+
 from terminusdb_client import Client, WOQLClient, WOQLSchema
 from terminusdb_client.schema import Schema, DocumentTemplate, RandomKey
 from typing import Union, Set, List
 
-from database import my_schema
+from models import my_schema, Pet
+
+
+from database import client
+
+import  crud
+
+from routers import all,pet
 
 
 
-client = WOQLClient("http://127.0.0.1:6363/")
-client.connect()
 try:
     client.create_database("MyDatabase")
 except:
     pass
-
-
-'''
-class Player(DocumentTemplate):
-    _schema = my_schema
-    name: str
-    age: int
-    weight: float
-    friend_of: Set ['Pet']
-'''
-
-
-
-
-
-
-
 
 
 my_schema.commit(client)
@@ -42,26 +30,18 @@ my_schema.commit(client)
 app = FastAPI()
 
 
+app.include_router(all.router)
+
+app.include_router(pet.router)
 
 
-class Item(BaseModel):
-    name: str
-    species: str
-    age: int
-    weight: float
-
-
-
-
-
-
+'''
 @app.get("/list-all")
-async def root():
-    #sth = (list(client.get_all_documents()))
-    #print ("asdfasdf")
-    #doc_id = sth[0]["@id"]
-    #client.delete_document(doc_id)
-    return (list(client.get_all_documents()))
+async def list_all():
+    return crud.list_all()
+
+'''
+
 
 '''
 @app.post("/add-player")
@@ -75,24 +55,7 @@ async def say_hello(item :Item):
 
 '''
 
-@app.post("/add-pet")
-async def say_hello(item :Item):
-    my_dog = Pet(name=item.name, species=item.species, age=item.age, weight=item.weight)
-    client.insert_document([my_dog])
-
-
-    return {"message": f"Hello {item}"}
-
-
-
-@app.delete("/wwww")
-async def root():
-    sth = (list(client.get_all_documents()))
-    print ("asdfasdf")
-    doc_id = sth[0]["@id"]
-    client.delete_document(doc_id)
-    return (list(client.get_all_documents()))
-
+'''
 
 
 
@@ -109,7 +72,7 @@ async def root():
     cos["weight"] =12
     print(my_dog)
 
-    #my_dog = Pet(name="asdf", species="asdfas", age=10, weight=12)
+    #my_dog = PetSchema(name="asdf", species="asdfas", age=10, weight=12)
     #my_dog = json.dumps(my_dog.__dict__,cls=MyEncoder)
 
     query = client.replace_document(cos)
@@ -120,3 +83,4 @@ async def root():
 
 
 
+'''
