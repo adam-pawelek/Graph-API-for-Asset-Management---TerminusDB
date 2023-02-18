@@ -50,9 +50,9 @@ class Actuator(DocumentTemplate):
     type: str
     hw_version: float
     installation_date: datetime
-    gateway_location = Space
-    powered = List['Equipment']
-    network_link = List['Equipment']
+    gateway_location: Space
+    powered: List['Equipment']
+    network_link: List['Equipment']
 
 
 class Equipment(DocumentTemplate):
