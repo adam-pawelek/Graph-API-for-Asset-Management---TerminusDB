@@ -4,7 +4,10 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from terminusdb_client import Client, WOQLClient, WOQLSchema
 from terminusdb_client.schema import Schema, DocumentTemplate, RandomKey
-from typing import Union
+from typing import Union, Set, List
+
+
+
 
 
 client = WOQLClient("http://127.0.0.1:6363/")
@@ -23,6 +26,23 @@ class Pet(DocumentTemplate):
     age: int
     weight: float
 
+
+class Player(DocumentTemplate):
+    _schema = my_schema
+    name: str
+    age: int
+    weight: float
+    friend_of: Set ['Pet']
+
+
+
+
+
+
+
+
+
+
 my_schema.commit(client)
 
 
@@ -39,6 +59,10 @@ class Item(BaseModel):
     weight: float
 
 
+
+
+
+
 @app.get("/list-all")
 async def root():
     #sth = (list(client.get_all_documents()))
@@ -46,6 +70,17 @@ async def root():
     #doc_id = sth[0]["@id"]
     #client.delete_document(doc_id)
     return (list(client.get_all_documents()))
+
+
+@app.post("/add-player")
+async def say_hello(item :Item):
+    my_dog = Pet(name=item.name, species=item.species, age=item.age, weight=item.weight)
+    my_player = Player(name='kkkkk',age=10,weight= 10.0,pets = [my_dog] )
+    client.insert_document([my_player])
+
+
+    return {"message": f"Hello {item}"}
+
 
 
 @app.post("/add-pet")
