@@ -14,12 +14,9 @@ async def get_pet(id: Union[str, None] = None):
     return pet_crud.get_pet(id)
 
 
-
 @router.post("/add-pet")
 async def say_hello(item :schema.PetSchema):
     return pet_crud.create_pet(item)
-
-
 
 
 @router.delete("/delete-pet")

@@ -15,7 +15,6 @@ class PetSchema(BaseModel):
 
 
 class PersonSchema(BaseModel):
-    id: str
     name: str
     surname: str
 

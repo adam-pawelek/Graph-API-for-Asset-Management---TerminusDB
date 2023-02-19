@@ -1,5 +1,3 @@
-
-
 import  schema
 import  models
 from database import client
