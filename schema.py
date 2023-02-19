@@ -20,7 +20,6 @@ class PersonSchema(BaseModel):
 
 
 class EquipmentSchema(BaseModel):
-    id: str
     label: str
     type: str
     ports_numer: int

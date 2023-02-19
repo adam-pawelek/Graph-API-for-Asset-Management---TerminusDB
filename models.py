@@ -56,7 +56,6 @@ class Actuator(DocumentTemplate):
 
 class Equipment(DocumentTemplate):
     _schema = my_schema
-    id: str
     label: str
     type: str
     ports_numer: int
