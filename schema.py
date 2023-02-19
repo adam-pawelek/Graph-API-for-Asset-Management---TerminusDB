@@ -79,12 +79,11 @@ class PlaceSchema(BaseModel):
 
 
 class UserSchema(BaseModel):
-    id: str
     name: str
     surname: str
     email: str
     password: str
-    role: str  # admin, user
+#    role: str  # admin, user
 
 
 

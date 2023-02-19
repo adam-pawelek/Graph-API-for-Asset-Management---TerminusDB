@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from models import my_schema, Pet
 from database import client
-from routers import all,pet_router, person_router, equipment_routers
+from routers import all,pet_router, person_router, equipment_routers, user_router
 
 try:
     client.create_database("MyDatabase")
@@ -23,6 +23,8 @@ app.include_router(pet_router.router)
 app.include_router(person_router.router)
 
 app.include_router(equipment_routers.router)
+
+app.include_router(user_router.router)
 
 
 

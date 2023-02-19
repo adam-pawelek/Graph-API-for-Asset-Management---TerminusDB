@@ -84,7 +84,6 @@ class Place(DocumentTemplate):
 
 class User(DocumentTemplate):
     _schema = my_schema
-    id: str
     name: str
     surname: str
     email: str
