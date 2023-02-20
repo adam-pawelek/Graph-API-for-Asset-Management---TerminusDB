@@ -16,7 +16,8 @@ async def get_equipment(id: Union[str, None] = None):
 
 @router.post("/add-equipment")
 async def create_equipment(item :schema.EquipmentSchema):
-    return equipment_crud.create_equipment(item)
+    equipment_crud.create_equipment(item)
+    return {}
 
 
 @router.delete("/delete-equipment")

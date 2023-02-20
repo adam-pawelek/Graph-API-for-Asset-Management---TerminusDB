@@ -22,7 +22,6 @@ class Person(DocumentTemplate):
 
 class Space(DocumentTemplate):
     _schema = my_schema
-    id: str
     label: str
     type: str
     capacity: int   # optional
@@ -64,7 +63,7 @@ class Equipment(DocumentTemplate):
 
 class Logic (DocumentTemplate):
     _schema = my_schema
-    id: str
+#    id: str
     label: str
     type: str
     use_case: Space

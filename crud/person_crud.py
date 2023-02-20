@@ -13,7 +13,7 @@ def get_person(id):
 def create_person(person_schema :schema.PersonSchema):
     person = models.Person(name=person_schema.name,surname = person_schema.surname)
     client.insert_document([person])
-    return {"message": f"Hello {person_schema}"}
+    return person
 
 
 

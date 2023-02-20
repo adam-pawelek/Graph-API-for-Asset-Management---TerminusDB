@@ -28,7 +28,6 @@ class EquipmentSchema(BaseModel):
 
 
 class SpaceSchema(BaseModel):
-    id: str
     label: str
     type: str
     capacity: int   # optional

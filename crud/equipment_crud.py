@@ -13,7 +13,7 @@ def get_equipment(id):
 def create_equipment(equipmentSchema :schema.EquipmentSchema):
     equipment = models.Equipment(label=equipmentSchema.label,type = equipmentSchema.type,ports_numer = equipmentSchema.ports_numer,capacity = equipmentSchema.capacity)
     client.insert_document([equipment])
-    return {"message": f"Hello {equipmentSchema}"}
+    return equipment
 
 
 

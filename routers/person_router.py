@@ -16,7 +16,8 @@ async def get_person(id: Union[str, None] = None):
 
 @router.post("/add-person")
 async def create_person(item :schema.PersonSchema):
-    return person_crud.create_person(item)
+    person_crud.create_person(item)
+    return {}
 
 
 @router.delete("/delete-person")
