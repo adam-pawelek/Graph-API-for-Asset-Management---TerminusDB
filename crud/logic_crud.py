@@ -15,9 +15,6 @@ def get_logic(id):
 
 def create_logic(logic_schema :schema.LogicSchema, space_id: str):
     space_get = client.get_document(space_id)
-    #print(space)
-    #space = json.dumps(space)
-
     person = models.Person(name="", surname="")
 
     space = models.Space(label="", type="", capacity=0, room=[],
@@ -26,12 +23,20 @@ def create_logic(logic_schema :schema.LogicSchema, space_id: str):
 
     logic_id = client.insert_document(logic)
 
-    logic_id = logic_id[0][19:]
+    schema_id = logic_id[1]
+    person_id = logic_id[2]
+    logic_id = logic_id[0]
+    print(logic_id)
     logic = client.get_document(logic_id)
 
-    print ()
-    logic["use_case"] = space_get
-    query = client.replace_document(logic)
+    #print ()
+    logic["use_case"] = space_id
+
+    client.replace_document(logic)
+
+    client.delete_document(schema_id)
+    client.delete_document(person_id)
+    #client.query(query)
 
 
     return {}
