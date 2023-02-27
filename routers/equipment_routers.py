@@ -6,7 +6,7 @@ from crud import  equipment_crud
 
 import schema
 
-router = APIRouter()
+router = APIRouter(tags=["Equipment"])
 
 
 @router.get("/get-equipment")

@@ -6,7 +6,7 @@ from crud import  logic_crud
 
 import schema
 
-router = APIRouter()
+router = APIRouter(tags=["Logic"])
 
 
 @router.get("/get-logic")

@@ -6,7 +6,7 @@ from crud import  person_crud, space_crud
 
 import schema
 
-router = APIRouter()
+router = APIRouter(tags=["Space"])
 
 
 @router.get("/get-space")

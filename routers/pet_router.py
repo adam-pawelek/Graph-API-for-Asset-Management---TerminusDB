@@ -6,7 +6,7 @@ from crud import  pet_crud
 
 import schema
 
-router = APIRouter()
+router = APIRouter(tags=["Pet"])
 
 
 @router.get("/get-pet")

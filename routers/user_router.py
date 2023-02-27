@@ -7,7 +7,7 @@ from crud import  user_crud
 
 import schema
 
-router = APIRouter()
+router = APIRouter(tags=["User"])
 
 
 @router.get("/get-user")
