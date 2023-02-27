@@ -1,11 +1,10 @@
-import json
 from typing import Union
 
 from fastapi import APIRouter
 
-from crud import  user_crud
+from terminusApp.crud import user_crud
 
-import schema
+from terminusApp import schema
 
 router = APIRouter(tags=["User"])
 
@@ -20,11 +19,11 @@ async def get_us(email: Union[str, None] = None):
 
 
 @router.post("/add-user")
-async def create_user(item :schema.UserSchema):
+async def create_user(item : schema.UserSchema):
     return user_crud.create_normal_user(item)
 
 @router.post("/add-admin-user")
-async def create_admin_user(item :schema.UserSchema):
+async def create_admin_user(item : schema.UserSchema):
     return user_crud.create_admin_user(item)
 
 
@@ -34,5 +33,5 @@ async def delete_user(id: Union[str, None] = None):
 
 
 @router.put("/update-user")
-async def update_user(user: schema.UserSchema,  id: Union[str, None] = None):
-    return user_crud.update_normal_user(user,id)
+async def update_user(user: schema.UserSchema, id: Union[str, None] = None):
+    return user_crud.update_normal_user(user, id)

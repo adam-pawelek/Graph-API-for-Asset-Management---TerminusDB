@@ -1,9 +1,5 @@
-
-
-
-import  schema
-import  models
-from database import client
+from terminusApp import models, schema
+from terminusApp.database import client
 
 
 
@@ -13,14 +9,14 @@ def get_actuator(id):
 
 
 
-def create_actuator(actuatorSchema :schema.ActuatorSchema,  space_id: str):
+def create_actuator(actuatorSchema : schema.ActuatorSchema, space_id: str):
 
     person = models.Person(name="", surname="")
     space = models.Space(label="", type="", capacity=0, room=[],
                          reference=person, equipment=[])
 
-    actuator = models.Actuator(label=actuatorSchema.label,type = actuatorSchema.type,hw_version = actuatorSchema.hw_version,installation_date = actuatorSchema.installation_date,
-                                 gateway_location=space  , powered =[]  , network_link= [])
+    actuator = models.Actuator(label=actuatorSchema.label, type = actuatorSchema.type, hw_version = actuatorSchema.hw_version, installation_date = actuatorSchema.installation_date,
+                               gateway_location=space, powered =[], network_link= [])
 
     actuator_id =client.insert_document([actuator])
 

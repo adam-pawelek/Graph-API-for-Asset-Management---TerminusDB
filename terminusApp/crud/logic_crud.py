@@ -1,11 +1,6 @@
-import  schema
-import  models
-from database import client
-from collections import namedtuple
-from types import SimpleNamespace
-import json
-from types import SimpleNamespace
-import json
+from terminusApp import models, schema
+from terminusApp.database import client
+
 
 def get_logic(id):
     logic = client.get_document(id)
@@ -13,11 +8,11 @@ def get_logic(id):
 
 ######### jak cos jest glopie ale dziala to znaczy ze nie jest glopie
 
-def create_logic(logic_schema :schema.LogicSchema, space_id: str):
+def create_logic(logic_schema : schema.LogicSchema, space_id: str):
     person = models.Person(name="", surname="")
     space = models.Space(label="", type="", capacity=0, room=[],
                          reference=person, equipment=[])
-    logic = models.Logic(label = logic_schema.label, type = logic_schema.type,use_case = space )
+    logic = models.Logic(label = logic_schema.label, type = logic_schema.type, use_case = space)
 
     logic_id = client.insert_document(logic)
 

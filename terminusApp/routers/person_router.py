@@ -2,9 +2,9 @@ from typing import Union
 
 from fastapi import APIRouter
 
-from crud import  person_crud
+from terminusApp.crud import person_crud
 
-import schema
+from terminusApp import schema
 
 router = APIRouter(tags=["Person"])
 
@@ -15,7 +15,7 @@ async def get_person(id: Union[str, None] = None):
 
 
 @router.post("/add-person")
-async def create_person(item :schema.PersonSchema):
+async def create_person(item : schema.PersonSchema):
     person_crud.create_person(item)
     return {}
 
@@ -26,5 +26,5 @@ async def delete_person(id: Union[str, None] = None):
 
 
 @router.put("/update-person")
-async def update_person(person: schema.PersonSchema,  id: Union[str, None] = None):
-    return person_crud.update_person(person,id)
+async def update_person(person: schema.PersonSchema, id: Union[str, None] = None):
+    return person_crud.update_person(person, id)

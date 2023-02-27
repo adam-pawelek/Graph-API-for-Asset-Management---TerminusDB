@@ -2,9 +2,9 @@ from typing import Union, List
 
 from fastapi import APIRouter
 
-from crud import  place_crud
+from terminusApp.crud import place_crud
 
-import schema
+from terminusApp import schema
 
 router = APIRouter(tags=["Place"])
 
@@ -16,7 +16,7 @@ async def get_place(id: Union[str, None] = None):
 
 @router.post("/add-place")
 async def create_place(item : schema.PlaceSchema, id_spaces: List[Union[str, None]]):
-    place_crud.create_place(item,id_spaces)
+    place_crud.create_place(item, id_spaces)
     return {}
 
 

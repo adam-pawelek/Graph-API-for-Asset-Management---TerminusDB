@@ -1,7 +1,5 @@
-
-import  schema
-import  models
-from database import client
+from terminusApp import models, schema
+from terminusApp.database import client
 
 
 
@@ -11,14 +9,14 @@ def get_sensor(id):
 
 
 
-def create_sensor(sensorSchema :schema.SensorSchema, space_id: str):
+def create_sensor(sensorSchema : schema.SensorSchema, space_id: str):
     person = models.Person(name="", surname="")
     space = models.Space(label="", type="", capacity=0, room=[],
                          reference=person, equipment=[])
 
-    sensor = models.Sensor(label=sensorSchema.label, type=sensorSchema.type,fw_version = sensorSchema.fw_version,
-                               hw_version=sensorSchema.hw_version, installation_date=sensorSchema.installation_date,
-                               sensor_location=space)
+    sensor = models.Sensor(label=sensorSchema.label, type=sensorSchema.type, fw_version = sensorSchema.fw_version,
+                           hw_version=sensorSchema.hw_version, installation_date=sensorSchema.installation_date,
+                           sensor_location=space)
 
     actuator_id = client.insert_document([sensor])
 

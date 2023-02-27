@@ -1,6 +1,5 @@
-import  schema
-import  models
-from database import client
+from terminusApp import models, schema
+from terminusApp.database import client
 
 
 
@@ -10,7 +9,7 @@ def get_pet(id):
 
 
 
-def create_pet(item :schema.PetSchema):
+def create_pet(item : schema.PetSchema):
     my_dog = models.Pet(name=item.name, species=item.species, age=item.age, weight=item.weight)
     client.insert_document([my_dog])
     return {"message": f"Hello {item}"}
@@ -25,7 +24,7 @@ def delete_pet(id):
 
 
 
-def update_pet(new_pet :schema.PetSchema, id):
+def update_pet(new_pet : schema.PetSchema, id):
     current_pet = client.get_document(id)
     my_dog = {}
     current_pet["name"] = new_pet.name

@@ -2,9 +2,9 @@ from typing import Union
 
 from fastapi import APIRouter
 
-from crud import  sensor_crud
+from terminusApp.crud import sensor_crud
 
-import schema
+from terminusApp import schema
 
 router = APIRouter(tags=["Sensor"])
 
@@ -15,8 +15,8 @@ async def get_actuator(id: Union[str, None] = None):
 
 
 @router.post("/add-sensor")
-async def create_actuator(item :schema.SensorSchema, space_id:  Union[str, None] = None):
-    sensor_crud.create_sensor(item,space_id)
+async def create_actuator(item : schema.SensorSchema, space_id:  Union[str, None] = None):
+    sensor_crud.create_sensor(item, space_id)
     return {}
 
 

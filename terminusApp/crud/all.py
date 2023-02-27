@@ -1,4 +1,4 @@
-from database import client
+from terminusApp.database import client
 
 
 def list_all():

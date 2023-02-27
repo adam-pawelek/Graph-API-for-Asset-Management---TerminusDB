@@ -2,9 +2,9 @@ from typing import Union
 
 from fastapi import APIRouter
 
-from crud import  person_crud, space_crud
+from terminusApp.crud import person_crud, space_crud
 
-import schema
+from terminusApp import schema
 
 router = APIRouter(tags=["Space"])
 
@@ -15,7 +15,7 @@ async def get_schema(id: Union[str, None] = None):
 
 
 @router.post("/add-space")
-async def create_person(item :schema.SpaceSchema):
+async def create_person(item : schema.SpaceSchema):
     return space_crud.create_space(item)
 
 
@@ -25,5 +25,5 @@ async def delete_person(id: Union[str, None] = None):
 
 
 @router.put("/update-space")
-async def update_person(person: schema.SpaceSchema,  id: Union[str, None] = None):
-    return person_crud.update_person(person,id)
+async def update_person(person: schema.SpaceSchema, id: Union[str, None] = None):
+    return person_crud.update_person(person, id)

@@ -2,9 +2,9 @@ from typing import Union
 
 from fastapi import APIRouter
 
-from crud import  pet_crud
+from terminusApp.crud import pet_crud
 
-import schema
+from terminusApp import schema
 
 router = APIRouter(tags=["Pet"])
 
@@ -15,7 +15,7 @@ async def get_pet(id: Union[str, None] = None):
 
 
 @router.post("/add-pet")
-async def say_hello(item :schema.PetSchema):
+async def say_hello(item : schema.PetSchema):
     return pet_crud.create_pet(item)
 
 
@@ -25,5 +25,5 @@ async def delete_pet(id: Union[str, None] = None):
 
 
 @router.put("/update-pet")
-async def update_pet(pet: schema.PetSchema,  id: Union[str, None] = None):
-    return pet_crud.update_pet(pet,id)
+async def update_pet(pet: schema.PetSchema, id: Union[str, None] = None):
+    return pet_crud.update_pet(pet, id)

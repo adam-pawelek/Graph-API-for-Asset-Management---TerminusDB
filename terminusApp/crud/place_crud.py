@@ -1,8 +1,7 @@
 from typing import List
 
-import  schema
-import  models
-from database import client
+from terminusApp import models, schema
+from terminusApp.database import client
 
 
 
@@ -12,8 +11,8 @@ def get_place(id):
 
 ######### jak cos jest glopie ale dziala to znaczy ze nie jest glopie
 
-def create_place(place_schema :schema.PlaceSchema, spaces_id: List[str]):
-    place = models.Place(label = place_schema.label, type = place_schema.type,location = [] )
+def create_place(place_schema : schema.PlaceSchema, spaces_id: List[str]):
+    place = models.Place(label = place_schema.label, type = place_schema.type, location = [])
 
     place_id = client.insert_document(place)
 

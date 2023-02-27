@@ -2,9 +2,9 @@ from typing import Union
 
 from fastapi import APIRouter
 
-from crud import  logic_crud
+from terminusApp.crud import logic_crud
 
-import schema
+from terminusApp import schema
 
 router = APIRouter(tags=["Logic"])
 
@@ -15,8 +15,8 @@ async def get_logic(id: Union[str, None] = None):
 
 
 @router.post("/add-logic")
-async def create_logic(item :schema.LogicSchema, id_space: Union[str, None] = None):
-    logic_crud.create_logic(item,id_space)
+async def create_logic(item : schema.LogicSchema, id_space: Union[str, None] = None):
+    logic_crud.create_logic(item, id_space)
     return {}
 
 

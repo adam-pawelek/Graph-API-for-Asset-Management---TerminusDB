@@ -1,13 +1,8 @@
 from typing import Optional
 
-from terminusdb_client import WOQLQuery
-
-import main
-import  schema
-import  models
-from database import client
-
-import json
+import terminusApp.auth.utils
+from terminusApp import  models, schema
+from terminusApp.database import client
 
 
 def get_noraml_user(id):
@@ -28,7 +23,7 @@ def get_user_by_email( email: str) -> Optional[dict]:
     result = list(matches)
     my_dict= result[0]
 
-    user = models.User(name=my_dict["name"],surname = my_dict["surname"], email= my_dict["email"], password = my_dict["password"], role = my_dict["role"])
+    user = models.User(name=my_dict["name"], surname = my_dict["surname"], email= my_dict["email"], password = my_dict["password"], role = my_dict["role"])
 
 
     print( user.email)
@@ -39,16 +34,16 @@ def get_user_by_email( email: str) -> Optional[dict]:
 
 
 
-def create_normal_user(user_schema :schema.UserSchema):
-    hashed_password = main.get_password_hash(user_schema.password)
-    user = models.User(name=user_schema.name,surname = user_schema.surname, email= user_schema.email, password = hashed_password, role = "user")
+def create_normal_user(user_schema : schema.UserSchema):
+    hashed_password = terminusApp.auth.utils.get_password_hash(user_schema.password)
+    user = models.User(name=user_schema.name, surname = user_schema.surname, email= user_schema.email, password = hashed_password, role ="user")
     client.insert_document([user])
     return {"message": f"Hello {user_schema}"}
 
 
-def create_admin_user(user_schema :schema.UserSchema):
+def create_admin_user(user_schema : schema.UserSchema):
     hashed_password = main.get_password_hash(user_schema.password)
-    user = models.User(name=user_schema.name,surname = user_schema.surname, email= user_schema.email, password = hashed_password, role = "admin")
+    user = models.User(name=user_schema.name, surname = user_schema.surname, email= user_schema.email, password = hashed_password, role ="admin")
     client.insert_document([user])
     return {"message": f"Hello {user_schema}"}
 
@@ -61,7 +56,7 @@ def delete_noraml_user(id):
 
 
 
-def update_normal_user(new_user :schema.UserSchema, id): #### admin
+def update_normal_user(new_user : schema.UserSchema, id): #### admin
     current_user = client.get_document(id)
     current_user["name"] = new_user.name
     current_user["surname"] = new_user.surname
