@@ -29,15 +29,11 @@ def create_logic(logic_schema :schema.LogicSchema, space_id: str):
     print(logic_id)
     logic = client.get_document(logic_id)
 
-    #print ()
     logic["use_case"] = space_id
-
     client.replace_document(logic)
 
     client.delete_document(schema_id)
     client.delete_document(person_id)
-    #client.query(query)
-
 
     return {}
 

@@ -23,6 +23,10 @@ async def get_us(email: Union[str, None] = None):
 async def create_user(item :schema.UserSchema):
     return user_crud.create_normal_user(item)
 
+@router.post("/add-admin-user")
+async def create_admin_user(item :schema.UserSchema):
+    return user_crud.create_admin_user(item)
+
 
 @router.delete("/delete-user")
 async def delete_user(id: Union[str, None] = None):
