@@ -2,7 +2,7 @@ from typing import Union, List
 
 from fastapi import APIRouter
 
-from terminusApp.views import place_crud
+from terminusApp.service import place_crud
 
 from terminusApp import schema
 
@@ -27,8 +27,7 @@ async def create_place(item : schema.PlaceSchema, id_spaces: List[Union[str, Non
 async def delete_place(id: Union[str, None] = None):
     return place_crud.delete_place(id)
 
-'''
+
 @router.put("/update-logic")
-async def update_logic(person: schema.PersonSchema,  id: Union[str, None] = None):
-    return logic_crud.up(person,id)
-'''
+async def update_place(person: schema.PlaceSchemaUpdate,  id: Union[str, None] = None):
+    return place_crud.update_place(person,id)

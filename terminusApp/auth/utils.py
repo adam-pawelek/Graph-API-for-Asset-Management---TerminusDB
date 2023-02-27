@@ -5,8 +5,8 @@ from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer, SecurityScopes
 from passlib.context import CryptContext
 
-import terminusApp.views
-from terminusApp import views
+import terminusApp.service
+from terminusApp import service
 
 ###############################
 from fastapi.security import (
@@ -27,7 +27,7 @@ from pydantic import BaseModel, ValidationError
 
 from terminusApp.auth.models import Token, TokenData
 
-from terminusApp import views, models
+from terminusApp import service, models
 
 
 
@@ -61,8 +61,8 @@ def verify_password(plain_password, hashed_password):
 
 
 def get_user(email: str):
-#    return terminusApp.views.user_crud.get_user_by_email(email)
-    return views.user_crud.get_user_by_email(email)
+#    return terminusApp.service.user_crud.get_user_by_email(email)
+    return service.user_crud.get_user_by_email(email)
 
 
 

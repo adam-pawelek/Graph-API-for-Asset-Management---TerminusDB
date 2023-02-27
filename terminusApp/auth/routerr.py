@@ -22,7 +22,7 @@ from terminusApp.auth.models import Token, TokenData
 
 # to get a string like this run:
 # openssl rand -hex 32
-from terminusApp import views, models
+from terminusApp import service, models
 from terminusApp.auth.utils import pwd_context, authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES, create_access_token, \
     get_current_active_user, get_current_user
 

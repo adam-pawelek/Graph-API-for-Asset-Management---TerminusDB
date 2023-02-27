@@ -2,7 +2,7 @@ from typing import Union
 
 from fastapi import APIRouter
 
-from terminusApp.views import logic_crud
+from terminusApp.service import logic_crud
 
 from terminusApp import schema
 
@@ -27,8 +27,9 @@ async def create_logic(item : schema.LogicSchema, id_space: Union[str, None] = N
 async def delete_logic(id: Union[str, None] = None):
     return logic_crud.delete_logic(id)
 
-'''
-@router.put("/update-logic")
-async def update_logic(person: schema.PersonSchema,  id: Union[str, None] = None):
-    return logic_crud.up(person,id)
-'''
+
+
+
+@router.put("/")
+async def update_logic(person: schema.LogicSchemaUpdate,  id: Union[str, None] = None):
+    return logic_crud.update_logic(person,id)

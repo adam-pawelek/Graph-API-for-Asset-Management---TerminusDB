@@ -28,6 +28,16 @@ def create_place(place_schema : schema.PlaceSchema, spaces_id: List[str]):
 
 
 
+def update_place(new_place :schema.PlaceSchemaUpdate, id):
+    current_place = client.get_document(id)
+    current_place["label"] = new_place.label
+    current_place["type"] = new_place.type
+    query = client.replace_document(current_place)
+
+    return {}
+
+
+
 
 def delete_place(id):
     client.delete_document(id)

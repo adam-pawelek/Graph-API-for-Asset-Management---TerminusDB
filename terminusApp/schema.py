@@ -60,18 +60,27 @@ class ActuatorSchema(BaseModel):
 
 
 class LogicSchema (BaseModel):
-    id: str
     label: str
     type: str
     use_case: SpaceSchema
 
 
 
+
+class LogicSchemaUpdate (BaseModel):
+    label: str
+    type: str
+
+
+
 class PlaceSchema(BaseModel):
-   # id: str
     label: str
     type: str
     location: List[SpaceSchema]
+
+class PlaceSchemaUpdate(BaseModel):
+    label: str
+    type: str
 
 
 

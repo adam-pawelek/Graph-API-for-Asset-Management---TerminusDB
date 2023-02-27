@@ -26,7 +26,6 @@ def create_logic(logic_schema : schema.LogicSchema, space_id: str):
     client.replace_document(logic)
     client.delete_document(schema_id)
     client.delete_document(person_id)
-
     return {}
 
 
@@ -38,13 +37,12 @@ def delete_logic(id):
 
 
 
-'''
+
 def update_logic(new_logic :schema.LogicSchema, id):
     current_logic = client.get_document(id)
-    current_logic["name"] = new_person.name
-    current_person["surname"] = new_person.surname
-    query = client.replace_document(current_person)
+    current_logic["label"] = new_logic.label
+    current_logic["type"] = new_logic.type
+    query = client.replace_document(current_logic)
 
     return {}
 
-'''
