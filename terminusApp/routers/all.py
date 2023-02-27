@@ -1,7 +1,7 @@
 
 from fastapi import APIRouter
 
-from terminusApp.crud import  all
+from terminusApp.views import  all
 
 
 router = APIRouter()

@@ -2,7 +2,7 @@ from typing import Union
 
 from fastapi import APIRouter
 
-from terminusApp.crud import person_crud, space_crud
+from terminusApp.views import person_crud, space_crud
 
 from terminusApp import schema
 

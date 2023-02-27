@@ -2,7 +2,7 @@ from typing import Union
 
 from fastapi import APIRouter
 
-from terminusApp.crud import actuator_crud
+from terminusApp.views import actuator_crud
 
 from terminusApp import schema
 

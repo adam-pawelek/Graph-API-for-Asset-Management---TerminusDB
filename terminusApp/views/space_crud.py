@@ -1,7 +1,7 @@
 from terminusApp import models, schema
 from terminusApp.database import client
 
-from terminusApp.crud import person_crud, equipment_crud
+from terminusApp.views import person_crud, equipment_crud
 
 
 def get_space(id):
