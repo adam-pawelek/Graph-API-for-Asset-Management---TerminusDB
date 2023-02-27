@@ -14,9 +14,7 @@ def get_logic(id):
 ######### jak cos jest glopie ale dziala to znaczy ze nie jest glopie
 
 def create_logic(logic_schema :schema.LogicSchema, space_id: str):
-    space_get = client.get_document(space_id)
     person = models.Person(name="", surname="")
-
     space = models.Space(label="", type="", capacity=0, room=[],
                          reference=person, equipment=[])
     logic = models.Logic(label = logic_schema.label, type = logic_schema.type,use_case = space )
@@ -31,7 +29,6 @@ def create_logic(logic_schema :schema.LogicSchema, space_id: str):
 
     logic["use_case"] = space_id
     client.replace_document(logic)
-
     client.delete_document(schema_id)
     client.delete_document(person_id)
 

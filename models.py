@@ -72,7 +72,7 @@ class Logic (DocumentTemplate):
 
 class Place(DocumentTemplate):
     _schema = my_schema
-    id: str
+    #id: str
     label: str
     type: str
     location: List['Space']

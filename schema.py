@@ -68,7 +68,7 @@ class LogicSchema (BaseModel):
 
 
 class PlaceSchema(BaseModel):
-    id: str
+   # id: str
     label: str
     type: str
     location: List[SpaceSchema]
