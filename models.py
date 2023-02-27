@@ -32,7 +32,7 @@ class Space(DocumentTemplate):
 
 class Sensor(DocumentTemplate):
     _schema = my_schema
-    id: str
+   # id: str
     label: str
     type: str
     fw_version: str
@@ -43,7 +43,7 @@ class Sensor(DocumentTemplate):
 
 class Actuator(DocumentTemplate):
     _schema = my_schema
-    id: str
+  #  id: str
     label: str
     type: str
     hw_version: float

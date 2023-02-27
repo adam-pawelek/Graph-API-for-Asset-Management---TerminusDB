@@ -13,15 +13,10 @@ def get_place(id):
 ######### jak cos jest glopie ale dziala to znaczy ze nie jest glopie
 
 def create_place(place_schema :schema.PlaceSchema, spaces_id: List[str]):
-    person = models.Person(name="", surname="")
-    space = models.Space(label="", type="", capacity=0, room=[],
-                         reference=person, equipment=[])
-    place = models.Place(label = place_schema.label, type = place_schema.type,location = [space] )
+    place = models.Place(label = place_schema.label, type = place_schema.type,location = [] )
 
     place_id = client.insert_document(place)
 
-    schema_id = place_id[1]
-    person_id = place_id[2]
     place_id = place_id[0]
     print(place_id)
     print("asdfffffffffdsafsdafsdafsda")
@@ -29,8 +24,6 @@ def create_place(place_schema :schema.PlaceSchema, spaces_id: List[str]):
 
     place["location"] = spaces_id
     client.replace_document(place)
-    client.delete_document(schema_id)
-    client.delete_document(person_id)
 
     return {}
 
