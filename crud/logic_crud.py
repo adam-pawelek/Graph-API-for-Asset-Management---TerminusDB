@@ -2,7 +2,7 @@ import  schema
 import  models
 from database import client
 from collections import namedtuple
-
+from types import SimpleNamespace
 import json
 from types import SimpleNamespace
 import json
@@ -11,24 +11,29 @@ def get_logic(id):
     logic = client.get_document(id)
     return logic
 
-
+######### jak cos jest glopie ale dziala to znaczy ze nie jest glopie
 
 def create_logic(logic_schema :schema.LogicSchema, space_id: str):
-    space = client.get_document(space_id)
-    print(space)
-    space = json.dumps(space)
-    space_try =  json.loads(space, object_hook = models.Space)
-   # space_model = models.Space()
-   # for key in space:
-   #     setattr(space_model, key, my_dict[key])
+    space_get = client.get_document(space_id)
+    #print(space)
+    #space = json.dumps(space)
 
-    logic = models.Logic(label = logic_schema.label, type = logic_schema.type,use_case = space_try )
-    #print (logic.label)
-    #logic_insert = {}
-    #logic_insert = logic.__dict__
-    #logic_insert["use_case"] = space
-    #print(logic_insert)
-    #client.insert_document(logic_insert)
+    person = models.Person(name="", surname="")
+
+    space = models.Space(label="", type="", capacity=0, room=[],
+                         reference=person, equipment=[])
+    logic = models.Logic(label = logic_schema.label, type = logic_schema.type,use_case = space )
+
+    logic_id = client.insert_document(logic)
+
+    logic_id = logic_id[0][19:]
+    logic = client.get_document(logic_id)
+
+    print ()
+    logic["use_case"] = space_get
+    query = client.replace_document(logic)
+
+
     return {}
 
 

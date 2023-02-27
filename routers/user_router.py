@@ -1,3 +1,4 @@
+import json
 from typing import Union
 
 from fastapi import APIRouter
@@ -12,6 +13,10 @@ router = APIRouter()
 @router.get("/get-user")
 async def get_user(id: Union[str, None] = None):
     return user_crud.get_noraml_user(id)
+
+@router.get("/get-email")
+async def get_us(email: Union[str, None] = None):
+    return user_crud.get_user_by_email(email).email
 
 
 @router.post("/add-user")

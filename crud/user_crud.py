@@ -1,12 +1,41 @@
+from typing import Optional
+
+from terminusdb_client import WOQLQuery
+
 import  schema
 import  models
 from database import client
 
+import json
 
 
 def get_noraml_user(id):
     user = client.get_document(id)
     return user
+
+
+
+def get_user_by_email( email: str) -> Optional[dict]:
+    # Define the WOQL query to search for a user by email
+    matches = client.query_document({"@type": "User",
+                                     "email": email})
+    #matches = matches.__dict__
+    #print(type(matches))
+    #print(matches[0])
+    #user = json.dumps(matches)
+    #user_try =  json.loads(user[0], object_hook = models.User)
+    result = list(matches)
+    my_dict= result[0]
+
+    user = models.User()
+
+    for key in my_dict:
+        setattr(user, key,  my_dict[key])
+
+    print( user.email)
+
+    return user
+
 
 
 
