@@ -42,7 +42,7 @@ def create_normal_user(user_schema : schema.UserSchema):
 
 
 def create_admin_user(user_schema : schema.UserSchema):
-    hashed_password = main.get_password_hash(user_schema.password)
+    hashed_password = terminusApp.auth.utils.get_password_hash(user_schema.password)
     user = models.User(name=user_schema.name, surname = user_schema.surname, email= user_schema.email, password = hashed_password, role ="admin")
     client.insert_document([user])
     return {"message": f"Hello {user_schema}"}

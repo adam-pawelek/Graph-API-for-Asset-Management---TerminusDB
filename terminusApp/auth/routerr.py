@@ -42,6 +42,10 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     user = authenticate_user( form_data.username, form_data.password)
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
+    if "admin" in form_data.scopes and user.role != "admin":
+        print("www")
+        print(user.role)
+        raise HTTPException(status_code=401, detail="No admin")
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         data={"sub": user.email, "scopes": form_data.scopes},
@@ -56,7 +60,7 @@ async def read_users_me(current_user: models.User = Depends(get_current_active_u
 
 @router.get("/users/me/items/")
 async def read_own_items(
-    current_user: models.User = Security(get_current_active_user, scopes=["items"])
+    current_user: models.User = Security(get_current_active_user, scopes=["admin"])
 ):
     return [{"item_id": "Foo", "owner": current_user.email}]
 

@@ -50,7 +50,7 @@ def get_password_hash(password):
 
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="token",
-    scopes={"me": "Read information about the current user.", "items": "Read items."},
+    scopes={"user": "Read information about the current user.", "admin": "Read items."},
 )
 
 def verify_password(plain_password, hashed_password):
@@ -120,7 +120,7 @@ async def get_current_user(
     return user
 
 async def get_current_active_user(
-    current_user: models.User = Security(get_current_user, scopes=["me"])
+    current_user: models.User = Security(get_current_user, scopes=["user"])
 ):
    # if current_user.disabled:
    #     raise HTTPException(status_code=400, detail="Inactive user")
