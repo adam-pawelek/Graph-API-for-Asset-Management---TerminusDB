@@ -6,22 +6,24 @@ from terminusApp.views import place_crud
 
 from terminusApp import schema
 
-router = APIRouter(tags=["Place"])
+router = APIRouter(
+    prefix="/place",
+    tags=["Place"])
 
 
-@router.get("/get-place")
+@router.get("/")
 async def get_place(id: Union[str, None] = None):
     return place_crud.get_place(id)
 
 
-@router.post("/add-place")
+@router.post("/")
 async def create_place(item : schema.PlaceSchema, id_spaces: List[Union[str, None]]):
     place_crud.create_place(item, id_spaces)
     return {}
 
 
 
-@router.delete("/delete-place")
+@router.delete("/")
 async def delete_place(id: Union[str, None] = None):
     return place_crud.delete_place(id)
 

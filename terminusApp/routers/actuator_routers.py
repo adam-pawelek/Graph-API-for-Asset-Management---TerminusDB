@@ -1,28 +1,32 @@
 from typing import Union
 
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 
 from terminusApp.views import actuator_crud
 
 from terminusApp import schema
 
-router = APIRouter(tags=["Actuator"])
+router = APIRouter(
+    prefix="/actuator",
+    tags=["Actuator"],
+)
 
 
-@router.get("/get-actuator")
+@router.get("/", status_code=status.HTTP_200_OK)
 async def get_actuator(id: Union[str, None] = None):
     return actuator_crud.get_actuator(id)
 
 
-@router.post("/add-actuator")
+@router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_actuator(item : schema.ActuatorSchema, space_id:  Union[str, None] = None):
     actuator_crud.create_actuator(item, space_id)
-    return {}
+    return
 
 
-@router.delete("/delete-actuator")
+@router.delete("/", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_actuator(id: Union[str, None] = None):
-    return actuator_crud.delete_actuator(id)
+    actuator_crud.delete_actuator(id)
+    return
 
 
 '''
