@@ -1,5 +1,9 @@
 # Graph-API-for-Asset-Management---TerminusDB
 
+This project is a FastAPI application that connects to a TerminusDB database. It provides a REST API for querying and manipulating the data in the database.
 
-user: admin
-password: root
+
+###To access the TerminusDB database in this project, you can use the following credentials:
+
+-Username: admin<br>
+-Password: root

@@ -18,7 +18,7 @@ class Space(DocumentTemplate):
     _schema = my_schema
     label: str
     type: str
-    capacity: int   # optional
+    capacity: int
     room: List ['Space']
     reference: Person
     equipment: List['Equipment']
@@ -26,18 +26,16 @@ class Space(DocumentTemplate):
 
 class Sensor(DocumentTemplate):
     _schema = my_schema
-   # id: str
     label: str
     type: str
     fw_version: str
-    hw_version: float # optional
+    hw_version: float
     installation_date: datetime
     sensor_location: Space
 
 
 class Actuator(DocumentTemplate):
     _schema = my_schema
-  #  id: str
     label: str
     type: str
     hw_version: float
@@ -52,12 +50,11 @@ class Equipment(DocumentTemplate):
     label: str
     type: str
     ports_numer: int
-    capacity: float # optional
+    capacity: float
 
 
 class Logic (DocumentTemplate):
     _schema = my_schema
-#    id: str
     label: str
     type: str
     use_case: Space
@@ -66,7 +63,6 @@ class Logic (DocumentTemplate):
 
 class Place(DocumentTemplate):
     _schema = my_schema
-    #id: str
     label: str
     type: str
     location: List['Space']
