@@ -58,3 +58,11 @@ async def add_network_link(main_id: Union[str, None] = None, change_id: Union[st
 @router.delete("/delete/network_link")
 async def remove_network_link(space_id: Union[str, None] = None,equipment_id: Union[str, None] = None ):
     return global_crud.remove_from_list(space_id,equipment_id,"network_link")
+
+
+
+@router.put("/change/gateway_location")
+async def change_gateway_location(main_id: Union[str, None] = None,change_id: Union[str, None] = None ):
+    return global_crud.change_attribute(main_id,change_id,"gateway_location")
+
+
