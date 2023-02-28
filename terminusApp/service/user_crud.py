@@ -1,5 +1,7 @@
 from typing import Optional
 
+from fastapi import HTTPException, status
+
 import terminusApp.auth.utils
 from terminusApp import  models, schema
 from terminusApp.database import client
@@ -35,6 +37,19 @@ def get_user_by_email( email: str) -> Optional[dict]:
 
 
 def create_normal_user(user_schema : schema.UserSchema):
+    my_exception = 0
+    try:
+        matches = client.query_document({"@type": "User","email": user_schema.email})
+        result = list(matches)
+        print(result)
+        if len(result) > 0:
+            my_exception = 1
+    except:
+        pass
+
+    if my_exception ==1:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="email in database")
+
     hashed_password = terminusApp.auth.utils.get_password_hash(user_schema.password)
     user = models.User(name=user_schema.name, surname = user_schema.surname, email= user_schema.email, password = hashed_password, role ="user")
     client.insert_document([user])
@@ -42,6 +57,20 @@ def create_normal_user(user_schema : schema.UserSchema):
 
 
 def create_admin_user(user_schema : schema.UserSchema):
+    my_exception = 0
+    try:
+        matches = client.query_document({"@type": "User","email": user_schema.email})
+        result = list(matches)
+        print(result)
+        if len(result) > 0:
+            my_exception = 1
+    except:
+        pass
+
+    if my_exception ==1:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="email in database")
+
+    
     hashed_password = terminusApp.auth.utils.get_password_hash(user_schema.password)
     user = models.User(name=user_schema.name, surname = user_schema.surname, email= user_schema.email, password = hashed_password, role ="admin")
     client.insert_document([user])
