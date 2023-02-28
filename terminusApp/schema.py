@@ -5,9 +5,6 @@ from typing import List
 
 
 
-
-
-
 class PersonSchema(BaseModel):
     name: str
     surname: str
@@ -20,7 +17,6 @@ class EquipmentSchema(BaseModel):
     capacity: float # optional
 
 
-
 class SpaceSchema(BaseModel):
     label: str
     type: str
@@ -29,11 +25,11 @@ class SpaceSchema(BaseModel):
     reference: PersonSchema
     equipment: List[EquipmentSchema]
 
+
 class SpaceSchemaUpdate(BaseModel):
     label: str
     type: str
     capacity: int
-
 
 
 class SensorSchema(BaseModel):
@@ -63,13 +59,12 @@ class ActuatorSchema(BaseModel):
     powered: List[EquipmentSchema]
     network_link: List[EquipmentSchema]
 
+
 class ActuatorSchemaUpdate(BaseModel):
     label: str
     type: str
     hw_version: float
     installation_date: datetime
-
-
 
 
 class LogicSchema (BaseModel):
@@ -78,12 +73,9 @@ class LogicSchema (BaseModel):
     use_case: SpaceSchema
 
 
-
-
 class LogicSchemaUpdate (BaseModel):
     label: str
     type: str
-
 
 
 class PlaceSchema(BaseModel):
@@ -91,12 +83,10 @@ class PlaceSchema(BaseModel):
     type: str
     location: List[SpaceSchema]
 
+
 class PlaceSchemaUpdate(BaseModel):
     label: str
     type: str
-
-
-
 
 
 class UserSchema(BaseModel):
@@ -104,7 +94,6 @@ class UserSchema(BaseModel):
     surname: str
     email: str
     password: str
-#    role: str  # admin, user
 
 
 

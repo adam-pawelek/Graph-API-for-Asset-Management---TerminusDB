@@ -3,9 +3,6 @@ from fastapi import HTTPException, status
 from terminusApp.database import client
 
 
-
-
-
 def get_all(type: str):
     matches = client.query_document({"@type": type})
     result = list(matches)
@@ -32,10 +29,6 @@ def delete(type: str, id: str):
     return {}
 
 
-
-
-
-
 def add_to_list(main_id, add_id, type):
     try:
         space = client.get_document(main_id)
@@ -48,6 +41,7 @@ def add_to_list(main_id, add_id, type):
     space[type].append(add_id)
     query = client.replace_document(space)
     return
+
 
 def remove_from_list(main_id, remove_id, type):
     try:
@@ -71,5 +65,4 @@ def change_attribute(main_id, change_id, type):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="")
     current_space[type] = change_id
     query = client.replace_document(current_space)
-
     return {}
