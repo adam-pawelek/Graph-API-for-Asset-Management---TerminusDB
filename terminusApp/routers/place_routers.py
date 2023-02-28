@@ -34,6 +34,17 @@ async def delete(id: Union[str, None] = None):
     return global_crud.delete("Place",id)
 
 
-@router.put("/update-logic")
+@router.put("/")
 async def update_place(person: schema.PlaceSchemaUpdate,  id: Union[str, None] = None):
     return place_crud.update_place(person,id)
+
+
+
+@router.put("/add/location")
+async def add_location(main_id: Union[str, None] = None, change_id: Union[str, None] = None):
+    return global_crud.add_to_list(main_id, change_id, "location")
+
+
+@router.delete("/delete/location")
+async def remove_location(space_id: Union[str, None] = None,equipment_id: Union[str, None] = None ):
+    return global_crud.remove_from_list(space_id,equipment_id,"location")
