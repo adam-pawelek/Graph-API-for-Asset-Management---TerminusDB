@@ -5,7 +5,7 @@ from fastapi import HTTPException, status
 import terminusApp.auth.utils
 from terminusApp import  models, schema
 from terminusApp.database import client
-
+from email_validator import validate_email, EmailNotValidError
 
 def get_noraml_user(id):
     user = client.get_document(id)
@@ -47,6 +47,14 @@ def create_normal_user(user_schema : schema.UserSchema):
     except:
         pass
 
+    try:
+        is_new_account= True
+        validation = validate_email(user_schema.email, check_deliverability=is_new_account)
+        email = validation.email
+    except EmailNotValidError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Bad email")
+
+
     if my_exception ==1:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="email in database")
 
@@ -67,10 +75,17 @@ def create_admin_user(user_schema : schema.UserSchema):
     except:
         pass
 
+    try:
+        is_new_account= True
+        validation = validate_email(user_schema.email, check_deliverability=is_new_account)
+        email = validation.email
+    except EmailNotValidError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Bad email")
+
     if my_exception ==1:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="email in database")
 
-    
+
     hashed_password = terminusApp.auth.utils.get_password_hash(user_schema.password)
     user = models.User(name=user_schema.name, surname = user_schema.surname, email= user_schema.email, password = hashed_password, role ="admin")
     client.insert_document([user])
