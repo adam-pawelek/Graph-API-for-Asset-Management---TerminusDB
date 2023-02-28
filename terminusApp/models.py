@@ -6,12 +6,6 @@ from typing import Set, List
 
 my_schema = WOQLSchema()
 
-class Pet(DocumentTemplate):
-    _schema = my_schema
-    name: str
-    species: str
-    age: int
-    weight: float
 
 
 class Person(DocumentTemplate):

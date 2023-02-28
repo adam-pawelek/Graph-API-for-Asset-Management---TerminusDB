@@ -7,12 +7,6 @@ from typing import List
 
 
 
-class PetSchema(BaseModel):
-    name: str
-    species: str
-    age: int
-    weight: float
-
 
 class PersonSchema(BaseModel):
     name: str
