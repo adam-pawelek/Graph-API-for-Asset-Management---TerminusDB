@@ -29,8 +29,7 @@ async def delete_actuator(id: Union[str, None] = None):
     return
 
 
-'''
-@router.put("/update-actuator")
-async def update_actuator(person: schema.EquipmentSchema,  id: Union[str, None] = None):
-    return actuator_crud.update_equipment(person,id)
-'''
+
+@router.put("/")
+async def update_actuator(actuator: schema.ActuatorSchemaUpdate,  id: Union[str, None] = None):
+    return actuator_crud.update_actuator(actuator,id)

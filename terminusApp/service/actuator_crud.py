@@ -43,15 +43,14 @@ def delete_actuator(id):
 
 
 
-'''
-def update_equipment(new_equipment :schema.EquipmentSchema, id):
+
+def update_actuator(new_actuator :schema.ActuatorSchemaUpdate, id):
     current_equipment = client.get_document(id)
-    current_equipment["label"] = new_equipment.label
-    current_equipment["type"] = new_equipment.type
-    current_equipment["ports_numer"] = new_equipment.ports_numer
-    current_equipment["capacity"] = new_equipment.capacity
+    current_equipment["label"] = new_actuator.label
+    current_equipment["type"] = new_actuator.type
+    current_equipment["installation_date"] = new_actuator.installation_date
+    current_equipment["hw_version"] = new_actuator.hw_version
     query = client.replace_document(current_equipment)
 
     return {}
     
-'''

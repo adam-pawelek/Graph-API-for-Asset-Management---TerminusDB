@@ -49,7 +49,6 @@ class SensorSchemaUpdate(BaseModel):
 
 
 class ActuatorSchema(BaseModel):
-    id: str
     label: str
     type: str
     hw_version: float
@@ -57,6 +56,12 @@ class ActuatorSchema(BaseModel):
     gateway_location: SpaceSchema
     powered: List[EquipmentSchema]
     network_link: List[EquipmentSchema]
+
+class ActuatorSchemaUpdate(BaseModel):
+    label: str
+    type: str
+    hw_version: float
+    installation_date: datetime
 
 
 
