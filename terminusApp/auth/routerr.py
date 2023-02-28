@@ -54,6 +54,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
+'''
 @router.get("/users/me/")
 async def read_users_me(current_user: models.User = Depends(get_current_active_user)):
     return current_user.email
@@ -68,3 +69,4 @@ async def read_own_items(
 @router.get("/status/")
 async def read_system_status(current_user: models.User = Depends(get_current_user)):
     return {"status": "ok"}
+'''
