@@ -37,3 +37,24 @@ async def delete(id: Union[str, None] = None):
 @router.put("/")
 async def update_actuator(actuator: schema.ActuatorSchemaUpdate,  id: Union[str, None] = None):
     return actuator_crud.update_actuator(actuator,id)
+
+
+
+@router.put("/add/powered")
+async def add_powered(main_id: Union[str, None] = None, change_id: Union[str, None] = None):
+    return global_crud.add_to_list(main_id, change_id, "powered")
+
+
+@router.delete("/delete/powered")
+async def remove_powered(space_id: Union[str, None] = None,equipment_id: Union[str, None] = None ):
+    return global_crud.remove_from_list(space_id,equipment_id,"powered")
+
+
+@router.put("/add/network_link")
+async def add_network_link(main_id: Union[str, None] = None, change_id: Union[str, None] = None):
+    return global_crud.add_to_list(main_id, change_id, "network_link")
+
+
+@router.delete("/delete/network_link")
+async def remove_network_link(space_id: Union[str, None] = None,equipment_id: Union[str, None] = None ):
+    return global_crud.remove_from_list(space_id,equipment_id,"network_link")
