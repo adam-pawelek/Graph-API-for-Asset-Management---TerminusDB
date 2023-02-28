@@ -1,3 +1,5 @@
+from fastapi import HTTPException, status
+
 from terminusApp import models, schema
 from terminusApp.database import client
 
@@ -46,3 +48,12 @@ def update_logic(new_logic :schema.LogicSchema, id):
 
     return {}
 
+
+def change_use_case(id, space_id):
+    try:
+        current_space = client.get_document(id)
+    except:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="")
+    current_space["use_case"] = space_id
+    query = client.replace_document(current_space)
+    return {}
