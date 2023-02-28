@@ -37,13 +37,21 @@ class SpaceSchema(BaseModel):
 
 
 class SensorSchema(BaseModel):
-    id: str
     label: str
     type: str
     fw_version: str
     hw_version: float # optional
     installation_date: datetime
     sensor_location: SpaceSchema
+
+
+class SensorSchemaUpdate(BaseModel):
+    label: str
+    type: str
+    fw_version: str
+    hw_version: float # optional
+    installation_date: datetime
+    #sensor_location: SpaceSchema
 
 
 class ActuatorSchema(BaseModel):

@@ -39,15 +39,15 @@ def delete_sensor(id):
     return (list(client.get_all_documents()))
 
 
-'''
-def update_equipment(new_equipment :schema.EquipmentSchema, id):
-    current_equipment = client.get_document(id)
-    current_equipment["label"] = new_equipment.label
-    current_equipment["type"] = new_equipment.type
-    current_equipment["ports_numer"] = new_equipment.ports_numer
-    current_equipment["capacity"] = new_equipment.capacity
-    query = client.replace_document(current_equipment)
+
+def update_sensor(new_sensor :schema.SensorSchemaUpdate, id):
+    current_sensor = client.get_document(id)
+    current_sensor["label"] = new_sensor.label
+    current_sensor["type"] = new_sensor.type
+    current_sensor["fw_version"] = new_sensor.fw_version
+    current_sensor["hw_version"] = new_sensor.hw_version
+    current_sensor["installation_date"] = new_sensor.installation_date
+    query = client.replace_document(current_sensor)
 
     return {}
 
-'''
