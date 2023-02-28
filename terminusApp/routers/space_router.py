@@ -4,28 +4,35 @@ from fastapi import APIRouter
 
 from terminusApp.service import person_crud, space_crud
 
-from terminusApp import schema
+from terminusApp import schema, global_crud
 
 router = APIRouter(
     prefix="/space",
     tags=["Space"])
 
 
+
+@router.get("/all")
+async def get_all():
+    return global_crud.get_all("Space")
+
+
+
 @router.get("/")
-async def get_schema(id: Union[str, None] = None):
-    return space_crud.get_space(id)
+async def get(id: Union[str, None] = None):
+    return global_crud.get("Space",id)
 
 
 @router.post("/")
-async def create_person(item : schema.SpaceSchema):
+async def create_space(item : schema.SpaceSchema):
     return space_crud.create_space(item)
 
 
 @router.delete("/")
-async def delete_person(id: Union[str, None] = None):
-    return person_crud.delete_person(id)
+async def delete(id: Union[str, None] = None):
+    return global_crud.delete("Space",id)
 
 
 @router.put("/")
-async def update_person(person: schema.SpaceSchema, id: Union[str, None] = None):
-    return person_crud.update_person(person, id)
+async def update_space(space: schema.SpaceSchemaUpdate, id: Union[str, None] = None):
+    return space_crud.update_space(space, id)

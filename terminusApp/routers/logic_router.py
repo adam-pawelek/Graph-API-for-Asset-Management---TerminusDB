@@ -4,16 +4,22 @@ from fastapi import APIRouter
 
 from terminusApp.service import logic_crud
 
-from terminusApp import schema
+from terminusApp import schema, global_crud
 
 router = APIRouter(
     prefix="/logic",
     tags=["Logic"])
 
 
+
+@router.get("/all")
+async def get_all_logic():
+    return global_crud.get_all("Logic")
+
+
 @router.get("/")
-async def get_logic(id: Union[str, None] = None):
-    return logic_crud.get_logic(id)
+async def get(id: Union[str, None] = None):
+    return global_crud.get("Logic",id)
 
 
 @router.post("/")
@@ -24,8 +30,8 @@ async def create_logic(item : schema.LogicSchema, id_space: Union[str, None] = N
 
 
 @router.delete("/")
-async def delete_logic(id: Union[str, None] = None):
-    return logic_crud.delete_logic(id)
+async def delete(id: Union[str, None] = None):
+    return global_crud.delete("Logic",id)
 
 
 

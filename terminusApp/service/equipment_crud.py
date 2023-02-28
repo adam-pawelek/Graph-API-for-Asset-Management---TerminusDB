@@ -7,7 +7,12 @@ def get_equipment(id):
     equipment = client.get_document(id)
     return equipment
 
-
+'''
+def get_all_equipment():
+    matches = client.query_document({"@type": "Equipment"})
+    result = list(matches)
+    return result
+'''
 
 def create_equipment(equipmentSchema : schema.EquipmentSchema):
     equipment = models.Equipment(label=equipmentSchema.label, type = equipmentSchema.type, ports_numer = equipmentSchema.ports_numer, capacity = equipmentSchema.capacity)

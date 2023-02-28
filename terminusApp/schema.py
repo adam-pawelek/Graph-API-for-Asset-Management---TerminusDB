@@ -29,6 +29,12 @@ class SpaceSchema(BaseModel):
     reference: PersonSchema
     equipment: List[EquipmentSchema]
 
+class SpaceSchemaUpdate(BaseModel):
+    label: str
+    type: str
+    capacity: int
+
+
 
 class SensorSchema(BaseModel):
     label: str

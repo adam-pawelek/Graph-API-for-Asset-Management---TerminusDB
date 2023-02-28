@@ -4,7 +4,7 @@ from fastapi import APIRouter, status
 
 from terminusApp.service import actuator_crud
 
-from terminusApp import schema
+from terminusApp import schema, global_crud
 
 router = APIRouter(
     prefix="/actuator",
@@ -12,9 +12,14 @@ router = APIRouter(
 )
 
 
-@router.get("/", status_code=status.HTTP_200_OK)
-async def get_actuator(id: Union[str, None] = None):
-    return actuator_crud.get_actuator(id)
+@router.get("/all")
+async def get_all():
+    return global_crud.get_all("Actuator")
+
+
+@router.get("/")
+async def get(id: Union[str, None] = None):
+    return global_crud.get("Actuator",id)
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
@@ -23,10 +28,9 @@ async def create_actuator(item : schema.ActuatorSchema, space_id:  Union[str, No
     return
 
 
-@router.delete("/", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_actuator(id: Union[str, None] = None):
-    actuator_crud.delete_actuator(id)
-    return
+@router.delete("/")
+async def delete(id: Union[str, None] = None):
+    return global_crud.delete("Actuator",id)
 
 
 

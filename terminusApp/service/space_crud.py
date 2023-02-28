@@ -32,11 +32,12 @@ def delete_space(id):
 
 
 
-def update_space(new_person : schema.PersonSchema, id):
-    current_person = client.get_document(id)
-    current_person["name"] = new_person.name
-    current_person["surname"] = new_person.surname
-    query = client.replace_document(current_person)
+def update_space(new_space : schema.SpaceSchemaUpdate, id):
+    current_space = client.get_document(id)
+    current_space["type"] = new_space.type
+    current_space["label"] = new_space.label
+    current_space["capacity"] = new_space.capacity
+    query = client.replace_document(current_space)
 
     return {}
     

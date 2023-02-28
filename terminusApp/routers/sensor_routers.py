@@ -4,16 +4,21 @@ from fastapi import APIRouter
 
 from terminusApp.service import sensor_crud
 
-from terminusApp import schema
+from terminusApp import schema, global_crud
 
 router = APIRouter(
     prefix="/sensor",
     tags=["Sensor"])
 
 
+@router.get("/all")
+async def get_all():
+    return global_crud.get_all("Sensor")
+
+
 @router.get("/")
-async def get_sensor(id: Union[str, None] = None):
-    return sensor_crud.get_sensor(id)
+async def get(id: Union[str, None] = None):
+    return global_crud.get("Sensor",id)
 
 
 @router.post("/")
@@ -23,8 +28,8 @@ async def create_sensor(item : schema.SensorSchema, space_id:  Union[str, None] 
 
 
 @router.delete("/")
-async def delete_sensor(id: Union[str, None] = None):
-    return sensor_crud.delete_sensor(id)
+async def delete(id: Union[str, None] = None):
+    return global_crud.delete("Sensor",id)
 
 
 

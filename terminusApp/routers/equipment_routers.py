@@ -6,6 +6,8 @@ from terminusApp.service import equipment_crud
 
 from terminusApp import schema
 
+from terminusApp import global_crud
+
 router = APIRouter(
     prefix="/equipment",
     tags=["Equipment"])
@@ -15,9 +17,13 @@ router = APIRouter(
 
 
 @router.get("/")
-async def get_equipment(id: Union[str, None] = None):
-    return equipment_crud.get_equipment(id)
+async def get(id: Union[str, None] = None):
+    return global_crud.get("Equipment",id)
 
+
+@router.get("/all")
+async def get_all_equipment():
+    return global_crud.get_all("Equipment")
 
 @router.post("/")
 async def create_equipment(item : schema.EquipmentSchema):
@@ -26,8 +32,8 @@ async def create_equipment(item : schema.EquipmentSchema):
 
 
 @router.delete("/")
-async def delete_equipment(id: Union[str, None] = None):
-    return equipment_crud.delete_equipment(id)
+async def delete(id: Union[str, None] = None):
+    return global_crud.delete("Equipment",id)
 
 
 @router.put("/")
