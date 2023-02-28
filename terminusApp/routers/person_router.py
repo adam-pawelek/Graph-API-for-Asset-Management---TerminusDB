@@ -1,10 +1,11 @@
 from typing import Union
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Security
 
+from terminusApp.auth.utils import get_current_active_user
 from terminusApp.service import person_crud
 
-from terminusApp import schema, global_crud
+from terminusApp import schema, global_crud, models
 
 router = APIRouter(
     prefix="/person",
@@ -13,7 +14,7 @@ router = APIRouter(
 
 
 @router.get("/all")
-async def get_all():
+async def get_all(current_user: models.User = Security(get_current_active_user, scopes=["admin"])):
     return global_crud.get_all("Person")
 
 @router.get("/")
