@@ -28,6 +28,15 @@ async def create_space(item : schema.SpaceSchema):
     return space_crud.create_space(item)
 
 
+@router.put("/add/room")
+async def create_space(space_id: Union[str, None] = None,room_id: Union[str, None] = None ):
+    return space_crud.add_room(space_id,room_id)
+
+
+@router.delete("/delete/room")
+async def create_space(space_id: Union[str, None] = None,room_id: Union[str, None] = None ):
+    return space_crud.remove_room(space_id,room_id)
+
 @router.delete("/")
 async def delete(id: Union[str, None] = None):
     return global_crud.delete("Space",id)

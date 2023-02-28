@@ -1,3 +1,5 @@
+from fastapi import HTTPException, status
+
 from terminusApp import models, schema
 from terminusApp.database import client
 
@@ -40,4 +42,30 @@ def update_space(new_space : schema.SpaceSchemaUpdate, id):
     query = client.replace_document(current_space)
 
     return {}
-    
+
+
+def add_room(space_id, room_id):
+    try:
+        space = client.get_document(space_id)
+        room = client.get_document(room_id)
+    except:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="")
+    if room_id in space["room"]:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Room already in space")
+
+    space["room"].append(room_id)
+    query = client.replace_document(space)
+    return
+
+def remove_room(space_id, room_id):
+    try:
+        space = client.get_document(space_id)
+        room = client.get_document(room_id)
+    except:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="")
+    if room_id not in space["room"]:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="")
+
+    space["room"].remove(room_id)
+    query = client.replace_document(space)
+    return
