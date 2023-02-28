@@ -36,3 +36,9 @@ async def delete(id: Union[str, None] = None):
 @router.put("/")
 async def update_sensor(sensor: schema.SensorSchemaUpdate,  id: Union[str, None] = None):
     return sensor_crud.update_sensor(sensor,id)
+
+
+
+@router.put("/change/sensor_location")
+async def change_use_case(main_id: Union[str, None] = None,change_id: Union[str, None] = None ):
+    return global_crud.change_attribute(main_id,change_id,"sensor_location")
