@@ -44,28 +44,39 @@ def update_space(new_space : schema.SpaceSchemaUpdate, id):
     return {}
 
 
-def add_room(space_id, room_id):
+def add_to_list(space_id, room_id,type):
     try:
         space = client.get_document(space_id)
         room = client.get_document(room_id)
     except:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="")
-    if room_id in space["room"]:
+    if room_id in space[type]:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Room already in space")
 
-    space["room"].append(room_id)
+    space[type].append(room_id)
     query = client.replace_document(space)
     return
 
-def remove_room(space_id, room_id):
+def remove_from_list(space_id, room_id, type):
     try:
         space = client.get_document(space_id)
         room = client.get_document(room_id)
     except:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="")
-    if room_id not in space["room"]:
+    if room_id not in space[type]:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="")
 
-    space["room"].remove(room_id)
+    space[type].remove(room_id)
     query = client.replace_document(space)
     return
+
+
+def change_reference(id, person_id):
+    try:
+        current_space = client.get_document(id)
+    except:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="")
+    current_space["reference"] = person_id
+    query = client.replace_document(current_space)
+
+    return {}

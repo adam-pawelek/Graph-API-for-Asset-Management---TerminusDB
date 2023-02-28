@@ -29,13 +29,31 @@ async def create_space(item : schema.SpaceSchema):
 
 
 @router.put("/add/room")
-async def create_space(space_id: Union[str, None] = None,room_id: Union[str, None] = None ):
-    return space_crud.add_room(space_id,room_id)
+async def add_room(space_id: Union[str, None] = None,room_id: Union[str, None] = None ):
+    return space_crud.add_to_list(space_id,room_id,"room")
 
 
 @router.delete("/delete/room")
-async def create_space(space_id: Union[str, None] = None,room_id: Union[str, None] = None ):
-    return space_crud.remove_room(space_id,room_id)
+async def remove_room(space_id: Union[str, None] = None,room_id: Union[str, None] = None ):
+    return space_crud.remove_from_list(space_id,room_id,"room")
+
+
+
+@router.put("/add/equipment")
+async def add_equipment(space_id: Union[str, None] = None,equipment_id: Union[str, None] = None ):
+    return space_crud.add_to_list(space_id,equipment_id,"equipment")
+
+
+@router.delete("/delete/equipment")
+async def remove_equipment(space_id: Union[str, None] = None,equipment_id: Union[str, None] = None ):
+    return space_crud.remove_from_list(space_id,equipment_id,"equipment")
+
+
+@router.put("/change/reference")
+async def change_reference(space_id: Union[str, None] = None,reference_id: Union[str, None] = None ):
+    return space_crud.change_reference(space_id,reference_id,)
+
+
 
 @router.delete("/")
 async def delete(id: Union[str, None] = None):
