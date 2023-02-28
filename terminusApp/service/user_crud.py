@@ -14,22 +14,12 @@ def get_noraml_user(id):
 
 
 def get_user_by_email( email: str) -> Optional[dict]:
-    # Define the WOQL query to search for a user by email
     matches = client.query_document({"@type": "User",
                                      "email": email})
-    #matches = matches.__dict__
-    #print(type(matches))
-    #print(matches[0])
-    #user = json.dumps(matches)
-    #user_try =  json.loads(user[0], object_hook = models.User)
     result = list(matches)
     my_dict= result[0]
-
     user = models.User(name=my_dict["name"], surname = my_dict["surname"], email= my_dict["email"], password = my_dict["password"], role = my_dict["role"])
-
-
     print( user.email)
-
     return user
 
 

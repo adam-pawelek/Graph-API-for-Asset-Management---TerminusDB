@@ -8,20 +8,15 @@ def get_person(id):
     return person
 
 
-
 def create_person(person_schema : schema.PersonSchema):
     person = models.Person(name=person_schema.name, surname = person_schema.surname)
     client.insert_document([person])
     return person
 
 
-
-
 def delete_person(id):
     client.delete_document(id)
     return (list(client.get_all_documents()))
-
-
 
 
 def update_person(new_person : schema.PersonSchema, id):

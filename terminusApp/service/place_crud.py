@@ -9,7 +9,6 @@ def get_place(id):
     logic = client.get_document(id)
     return logic
 
-######### jak cos jest glopie ale dziala to znaczy ze nie jest glopie
 
 def create_place(place_schema : schema.PlaceSchema, spaces_id: List[str]):
     place = models.Place(label = place_schema.label, type = place_schema.type, location = [])
@@ -27,7 +26,6 @@ def create_place(place_schema : schema.PlaceSchema, spaces_id: List[str]):
     return {}
 
 
-
 def update_place(new_place :schema.PlaceSchemaUpdate, id):
     current_place = client.get_document(id)
     current_place["label"] = new_place.label
@@ -35,8 +33,6 @@ def update_place(new_place :schema.PlaceSchemaUpdate, id):
     query = client.replace_document(current_place)
 
     return {}
-
-
 
 
 def delete_place(id):

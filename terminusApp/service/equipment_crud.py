@@ -7,12 +7,6 @@ def get_equipment(id):
     equipment = client.get_document(id)
     return equipment
 
-'''
-def get_all_equipment():
-    matches = client.query_document({"@type": "Equipment"})
-    result = list(matches)
-    return result
-'''
 
 def create_equipment(equipmentSchema : schema.EquipmentSchema):
     equipment = models.Equipment(label=equipmentSchema.label, type = equipmentSchema.type, ports_numer = equipmentSchema.ports_numer, capacity = equipmentSchema.capacity)
@@ -20,13 +14,9 @@ def create_equipment(equipmentSchema : schema.EquipmentSchema):
     return equipment
 
 
-
-
 def delete_equipment(id):
     client.delete_document(id)
     return (list(client.get_all_documents()))
-
-
 
 
 def update_equipment(new_equipment : schema.EquipmentSchema, id):
@@ -36,5 +26,4 @@ def update_equipment(new_equipment : schema.EquipmentSchema, id):
     current_equipment["ports_numer"] = new_equipment.ports_numer
     current_equipment["capacity"] = new_equipment.capacity
     query = client.replace_document(current_equipment)
-
     return {}

@@ -1,14 +1,3 @@
-from datetime import timedelta, datetime
-from typing import Union
-
-from fastapi import Depends, HTTPException
-from fastapi.security import OAuth2PasswordBearer, SecurityScopes
-from passlib.context import CryptContext
-
-import terminusApp.service
-from terminusApp import service
-
-###############################
 from fastapi.security import (
     OAuth2PasswordBearer,
     OAuth2PasswordRequestForm,
@@ -20,21 +9,15 @@ from passlib.context import CryptContext
 
 from datetime import datetime, timedelta
 from typing import List, Union
-from fastapi import FastAPI, APIRouter
 from fastapi import Depends, HTTPException, status, Security
 from pydantic import BaseModel, ValidationError
 
-
 from terminusApp.auth.models import Token, TokenData
-
 from terminusApp import service, models
 
 
 
-
-
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
@@ -44,10 +27,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 def get_password_hash(password):
     return pwd_context.hash(password)
 
-
-
-
-
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="token",
     scopes={"user": "Read information about the current user.", "admin": "Read items."},
@@ -56,14 +35,8 @@ oauth2_scheme = OAuth2PasswordBearer(
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
-
-
-
-
 def get_user(email: str):
-#    return terminusApp.service.user_crud.get_user_by_email(email)
     return service.user_crud.get_user_by_email(email)
-
 
 
 def authenticate_user (email: str, password: str):
@@ -122,6 +95,4 @@ async def get_current_user(
 async def get_current_active_user(
     current_user: models.User = Security(get_current_user, scopes=["user"])
 ):
-   # if current_user.disabled:
-   #     raise HTTPException(status_code=400, detail="Inactive user")
     return current_user

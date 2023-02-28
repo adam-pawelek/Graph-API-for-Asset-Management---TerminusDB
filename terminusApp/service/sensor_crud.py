@@ -8,7 +8,6 @@ def get_sensor(id):
     return actuator
 
 
-
 def create_sensor(sensorSchema : schema.SensorSchema, space_id: str):
     person = models.Person(name="", surname="")
     space = models.Space(label="", type="", capacity=0, room=[],
@@ -37,7 +36,6 @@ def create_sensor(sensorSchema : schema.SensorSchema, space_id: str):
 def delete_sensor(id):
     client.delete_document(id)
     return (list(client.get_all_documents()))
-
 
 
 def update_sensor(new_sensor :schema.SensorSchemaUpdate, id):
